@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     #redirect_to @order.get_pay
-    render :text => Robokassa.get_currencies.to_yaml
+    render :text => Robokassa.get_currencies.to_s
     # respond_to do |format|
     #   if @order.save
     #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
