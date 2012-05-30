@@ -4,6 +4,6 @@
     = f.text_field :price
   .field
     = f.label :currency
-    = f.select :currency, options_for_select(Order::CURRENTIES)         
+    = f.select :currency, options_for_select(Robokassa.get_currencies)         
   .actions
     = f.submit 'Save'
