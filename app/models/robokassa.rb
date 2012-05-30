@@ -16,7 +16,7 @@ class Robokassa
   	if doc.xpath("//Result/Code").text.to_i == 0 
         #result = doc.xpath("//*[@Code='EMoney']//Currency")#doc.xpath("//*[@Code='EMoney']//xmlns:Currency").to_s
 	       result = doc.xpath("//*[@Code='EMoney']//Currency").map do |c|
-	      		c = [c["Name"], c["Label"]]
+	      		c = ["key", "value"]
 	       end
 
 	       #  result += doc.xpath("//*[@Code='BankCard']/Currency").map do |c|
