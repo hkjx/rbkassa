@@ -40,7 +40,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
-    redirect_to @order.get_pay
+    #redirect_to @order.get_pay
+    render :text => Robokassa.get_currencies
     # respond_to do |format|
     #   if @order.save
     #     format.html { redirect_to @order, notice: 'Order was successfully created.' }

@@ -11,17 +11,17 @@ class Robokassa
 
   def self.get_currencies(webmoney = true, lang = "ru")
   	req_url = "#{SERVICES_URL}/GetCurrencies?MerchantLogin=#{MERCHANT_LOGIN}&Language=#{lang}"
-  	doc = Nokogiri::XML(open(req_url))
+  	doc = Nokogiri::XML(open(req_url)).remove_namespaces!
 
-  	if doc.xpath("//dc:Result/dc:Code", 'dc' => "URI").text.to_i == 0 
+  	if doc.xpath("//Result/Code").text.to_i == 0 
+        result = doc.xpath("//Result/Code").text#doc.xpath("//*[@Code='EMoney']//xmlns:Currency").to_s
+	       # result = doc.xpath("//*[@Code='EMoney']/Currency").map do |c|
+	      	# 	c = [c["Name"], c["Label"]]
+	       # end
 
-	       result = doc.xpath("//*[@Code='EMoney']//dc:Currency", 'dc' => "URI").map do |c|
-	      		c = [c["Name"], c["Label"]]
-	       end
-
-	        result += doc.xpath("//*[@Code='BankCard']//dc:Currency", 'dc' => "URI").map do |c|
-	      	 	c = [c["Name"], c["Label"]]	   
-	      	 end 	
+	       #  result += doc.xpath("//*[@Code='BankCard']/Currency").map do |c|
+	      	#  	c = [c["Name"], c["Label"]]	   
+	      	#  end 	
 	end
   end
 
@@ -38,8 +38,8 @@ class Robokassa
   def self.get_rates (currency, out_summ, lang = "ru")
   	req_url="http://test.robokassa.ru/Webservice/Service.asmx/GetRates?MerchantLogin=hkjx&IncCurrLabel=#{currency}&OutSum=#{out_summ}&Language=ru"
   	doc = Nokogiri::XML(open(req_url))
-  	if doc.xpath("//dc:Result/dc:Code", 'dc' => "URI").text.to_i == 0
-		doc.xpath("//*[@Label='#{currency}']//dc:Rate", 'dc' => "URI").first["IncSum"].to_f
+  	if doc.xpath("//Result/Code").text.to_i == 0
+		doc.xpath("//*[@Label='#{currency}']/Rate").first["IncSum"].to_f
   	end
   end 
 end

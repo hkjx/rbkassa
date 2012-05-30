@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  #CURRENTIES = Robokassa.get_currencies
+  CURRENTIES = Robokassa.get_currencies
   attr_accessible :currency, :price
   attr_reader :currenties
 
