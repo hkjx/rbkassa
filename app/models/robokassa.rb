@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'nokogiri'
 
 class Robokassa
 
@@ -18,9 +19,9 @@ class Robokassa
 	      		c = [c["Name"], c["Label"]]
 	       end
 
-	       result += doc.xpath("//*[@Code='BankCard']//xmlns:Currency").map do |c|
-	      		c = [c["Name"], c["Label"]]	   
-	      	end 	
+	        result += doc.xpath("//*[@Code='BankCard']//xmlns:Currency").map do |c|
+	      	 	c = [c["Name"], c["Label"]]	   
+	      	 end 	
 	end
   end
 

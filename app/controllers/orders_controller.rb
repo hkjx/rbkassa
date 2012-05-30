@@ -25,7 +25,6 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @order = Order.new
-    redirect_to @order.get_pay
     # respond_to do |format|
     #   format.html # new.html.erb
     #   format.json { render json: @order }
@@ -41,16 +40,16 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render json: @order, status: :created, location: @order }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to @order.get_pay
+    # respond_to do |format|
+    #   if @order.save
+    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
+    #     format.json { render json: @order, status: :created, location: @order }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PUT /orders/1
