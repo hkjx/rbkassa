@@ -1,6 +1,20 @@
 class OrdersController < ApplicationController
-  # GET /orders
-  # GET /orders.json
+  def result
+    if params[:SignatureValue]= Digest::MD5.hexdigest([Robokassa::MERCHANT_LOGIN,params[:OutSum],params[:InvId], Robokassa::MERCHANT_PASS_1].join(':'))
+      render :text => "OK#{params[:InvId]}"
+    else
+      render :text => "FAIL"
+    end
+  end
+
+  def success
+    @order = Order.new(:price => params[:OutSum], :inv_id => params[:InvId])
+    @order.save
+  end
+
+  def fail
+    
+  end
   def index
     @orders = Order.all
 
@@ -10,8 +24,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
+
   def show
     @order = Order.find(params[:id])
 
@@ -21,27 +34,19 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/new
-  # GET /orders/new.json
   def new
     @order = Order.new
-    # respond_to do |format|
-    #   format.html # new.html.erb
-    #   format.json { render json: @order }
-    # end
+    @currencies = Robokassa.get_currencies
   end
 
-  # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
   end
 
-  # POST /orders
-  # POST /orders.json
   def create
     @order = Order.new(params[:order])
-    #redirect_to @order.get_pay
-    render :text => Robokassa.get_currencies.to_s
+    redirect_to @order.get_pay
+    #render :text => Robokassa.get_currencies.to_s
     # respond_to do |format|
     #   if @order.save
     #     format.html { redirect_to @order, notice: 'Order was successfully created.' }

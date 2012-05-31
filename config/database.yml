@@ -8,11 +8,11 @@ development:
   database: pg_pg_rbk_dev
   host: localhost
   username: postgres
-  password: asdf1234
+  password: hcmf58
   
 production:
   adapter: postgresql
   database: pg_pg_rbk_prod
   host: localhost
   username: postgres
-  password: asdf1234
+  password: hcmf58

@@ -1,4 +1,7 @@
 PgRbk::Application.routes.draw do
+  match 'orders/result'
+  match 'orders/success'
+  match 'orders/fail'
   resources :orders
 
   # The priority is based upon order of creation:

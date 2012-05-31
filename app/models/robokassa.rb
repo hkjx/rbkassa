@@ -36,10 +36,10 @@ class Robokassa
   end
 
   def self.get_rates (currency, out_summ, lang = "ru")
-  	req_url="http://test.robokassa.ru/Webservice/Service.asmx/GetRates?MerchantLogin=hkjx&IncCurrLabel=#{currency}&OutSum=#{out_summ}&Language=ru"
-  	doc = Nokogiri::XML(open(req_url))
+  	req_url="http://test.robokassa.ru/Webservice/Service.asmx/GetRates?MerchantLogin=#{MERCHANT_LOGIN}&IncCurrLabel=#{currency}&OutSum=#{out_summ}&Language=ru"
+  	doc = Nokogiri::XML(open(req_url)).remove_namespaces!
   	if doc.xpath("//Result/Code").text.to_i == 0
-		doc.xpath("//*[@Label='#{currency}']/Rate").first["IncSum"].to_f
+		  doc.xpath("//*[@Label='#{currency}']/Rate").first["IncSum"].to_f
   	end
   end 
 end

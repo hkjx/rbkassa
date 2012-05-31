@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20120530113325) do
   create_table "orders", :force => true do |t|
     t.float    "price"
     t.string   "currency"
+    t.integer  "inv_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
