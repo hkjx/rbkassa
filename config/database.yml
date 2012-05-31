@@ -9,6 +9,7 @@ development:
   host: localhost
   username: postgres
   password: hcmf58
+  encoding: utf8
   
 production:
   adapter: postgresql
@@ -16,3 +17,4 @@ production:
   host: localhost
   username: postgres
   password: hcmf58
+  encoding: utf8

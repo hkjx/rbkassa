@@ -19,9 +19,9 @@ class Robokassa
 	      		c = [c["Name"], c["Label"]]
 	       end
 
-	       #  result += doc.xpath("//*[@Code='BankCard']/Currency").map do |c|
-	      	#  	c = [c["Name"], c["Label"]]	   
-	      	#  end 	
+	       result += doc.xpath("//*[@Code='BankCard']//Currency").map do |c|
+	      	 	c = [c["Name"], c["Label"]]	   
+	      	end 	
 	end
   end
 

@@ -1,9 +1,13 @@
-= form_for @order do |f|
+= form_for @order, :html => {:id => "new_payment" }  do |f|
   .field
     = f.label :price
     = f.text_field :price
+    WMZ
   .field
-    = f.label :currency
-    = f.select :currency, options_for_select(@currencies)         
+    = f.label "currency of payment"
+    = f.select :currency, options_for_select(@currencies)     
+  .field
+    = f.label :user_id
+    = f.select :user_id, options_for_select(@user_names)          
   .actions
-    = f.submit 'Save'
+    = f.submit 'Pay'

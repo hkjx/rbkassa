@@ -3,9 +3,10 @@
 %p
   %b Price:
   = @order.price
+  WMZ
 %p
-  %b Currency:
-  = @order.currency
+  %b created time:
+  = @order.created_at
 
 = link_to 'Edit', edit_order_path(@order)
 \|

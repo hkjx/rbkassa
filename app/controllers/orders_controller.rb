@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def result
-    if params[:SignatureValue]= Digest::MD5.hexdigest([Robokassa::MERCHANT_LOGIN,params[:OutSum],params[:InvId], Robokassa::MERCHANT_PASS_1].join(':'))
+    if params[:SignatureValue]= Digest::MD5.hexdigest([Robokassa::MERCHANT_LOGIN,params[:OutSum],params[:InvId], Robokassa::MERCHANT_PASS_1, "shp_currency=#{params[:shp_currency]}","shp_prc=#{params[:shp_prc]}", "shp_uid=#{params[:shp_uid]}"].join(':'))
       render :text => "OK#{params[:InvId]}"
     else
       render :text => "FAIL"
@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def success
-    @order = Order.new(:price => params[:OutSum], :inv_id => params[:InvId])
+    @order = Order.new(:price => params[:shp_prc], :inv_id => params[:InvId], :user_id => params[:shp_uid], :currency => params[:shp_currency])
     @order.save
   end
 
@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @currencies = Robokassa.get_currencies
+    @user_names = User.all.map{|u| [u.name, u.id]}
   end
 
   def edit
@@ -45,7 +46,13 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(params[:order])
-    redirect_to @order.get_pay
+    if @order.valid?
+      redirect_to @order.get_pay
+    else
+      redirect_to :back 
+      flash[:notice] = "Invalid price field"
+    end
+    #render :text => user.name
     #render :text => Robokassa.get_currencies.to_s
     # respond_to do |format|
     #   if @order.save

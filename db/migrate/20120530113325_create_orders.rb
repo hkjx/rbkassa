@@ -4,6 +4,7 @@ class CreateOrders < ActiveRecord::Migration
       t.float :price
       t.string :currency
       t.integer :inv_id
+      t.integer :user_id
 
       t.timestamps
     end
