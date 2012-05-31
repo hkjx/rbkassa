@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
   end
   def index
     @orders = Order.all
-
+    @user = User.find(@orders.user_id)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
@@ -52,17 +52,6 @@ class OrdersController < ApplicationController
       redirect_to :back 
       flash[:notice] = "Invalid price field"
     end
-    #render :text => user.name
-    #render :text => Robokassa.get_currencies.to_s
-    # respond_to do |format|
-    #   if @order.save
-    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
-    #     format.json { render json: @order, status: :created, location: @order }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PUT /orders/1
