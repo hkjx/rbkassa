@@ -1,16 +1,6 @@
-development:
   merchant_url: http://test.robokassa.ru/Index.aspx
   services_url: http://test.robokassa.ru/Webservice/Service.asmx
   merchant_login: hkjx
   merchant_pass1: asdf1234
   merchant_pass2: zxcv0987
-
-test:
-  <<: *config
-
-production:
-  merchant_url: http://test.robokassa.ru/Index.aspx
-  services_url: http://test.robokassa.ru/Webservice/Service.asmx
-  merchant_login: hkjx
-  merchant_pass1: asdf1234
-  merchant_pass2: zxcv0987
+  
