@@ -8,7 +8,7 @@ development:
   database: pg_pg_rbk_dev
   host: localhost
   username: postgres
-  password: hcmf58
+  password: asdf1234
   encoding: utf8
   
 production:
@@ -16,5 +16,5 @@ production:
   database: pg_pg_rbk_prod
   host: localhost
   username: postgres
-  password: hcmf58
+  password: asdf1234
   encoding: utf8

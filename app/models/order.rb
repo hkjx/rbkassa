@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
   attr_accessible :currency, :price, :inv_id, :user_id
   validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than => 0}
+  CURRENCIES = Robokassa.get_currencies
 
   def get_pay
   		merchant_url = Robokassa::MERCHANT_URL

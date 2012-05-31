@@ -3,11 +3,12 @@ require 'nokogiri'
 
 class Robokassa
 
-  MERCHANT_URL = 'http://test.robokassa.ru/Index.aspx'
-  SERVICES_URL = 'http://test.robokassa.ru/Webservice/Service.asmx'
-  MERCHANT_LOGIN = 'hkjx'
-  MERCHANT_PASS_1 = 'asdf1234'
-  MERCHANT_PASS_2 = 'zxcv0987'
+  MERCHANT_URL = ROBOKASSA_CONFIG['merchant_url']
+  SERVICES_URL = ROBOKASSA_CONFIG['services_url']
+  MERCHANT_LOGIN = ROBOKASSA_CONFIG['merchant_login']
+  MERCHANT_PASS_1 = ROBOKASSA_CONFIG['merchant_pass1']
+  MERCHANT_PASS_2 = ROBOKASSA_CONFIG['merchant_pass2']
+  
 
   def self.get_currencies(webmoney = true, lang = "ru")
   	req_url = "#{SERVICES_URL}/GetCurrencies?MerchantLogin=#{MERCHANT_LOGIN}&Language=#{lang}"
