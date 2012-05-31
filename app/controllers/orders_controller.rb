@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @currencies = Order::CURRENCIES
+    @currencies = Order.currencies
     @user_names = User.all.map{|u| [u.name, u.id]}
   end
 
