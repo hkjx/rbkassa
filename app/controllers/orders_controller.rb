@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
   end
   def index
     @orders = Order.all
-    @user = User.find(@orders.user_id)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }

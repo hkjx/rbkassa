@@ -15,7 +15,7 @@
         = order.price
         WMZ
       %td
-        =@user.name
+        =User.find(user_id).name
       %td= order.created_at
       %td= link_to 'Show', order
       %td= link_to 'Edit', edit_order_path(order)
