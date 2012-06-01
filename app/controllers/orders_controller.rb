@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_filter :get_currencies
+
   def result
     if params[:SignatureValue]= Digest::MD5.hexdigest([Robokassa::MERCHANT_LOGIN,params[:OutSum],params[:InvId], Robokassa::MERCHANT_PASS_1, "shp_currency=#{params[:shp_currency]}","shp_prc=#{params[:shp_prc]}", "shp_uid=#{params[:shp_uid]}"].join(':'))
       render :text => "OK#{params[:InvId]}"
@@ -35,7 +37,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @currencies = CURRENTIES
     @user_names = User.all.map{|u| [u.name, u.id]}
   end
 
@@ -79,5 +80,10 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_url }
       format.json { head :no_content }
     end
+  end
+
+private
+  def get_currencies
+    @currencies = Robokassa.get_currencies
   end
 end
