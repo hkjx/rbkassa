@@ -1,4 +1,3 @@
-require 'Nokogiri'
 require 'open-uri'
 
 ROBOKASSA_CONFIG = YAML.load_file("#{Rails.root}/config/robokassa.yml")
