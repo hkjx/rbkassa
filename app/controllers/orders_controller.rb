@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @currencies = Robokassa.get_currencies#Order.currencies
+    @currencies = CURRENTIES
     @user_names = User.all.map{|u| [u.name, u.id]}
   end
 
